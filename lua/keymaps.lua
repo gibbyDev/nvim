@@ -43,3 +43,15 @@ vim.api.nvim_set_keymap("n", "<leader>nn", ":Noice dismiss<CR>", {noremap=true})
 vim.keymap.set("n", "<leader>ee", "<cmd>GoIfErr<cr>",
   {silent = true, noremap = true}
 )
+
+vim.api.nvim_set_keymap('n', '<leader>rr', ':lua ReloadConfig()<CR>', { noremap = true, silent = true })
+
+function ReloadConfig()
+  for name,_ in pairs(package.loaded) do
+    if name:match("^lua/") then
+      package.loaded[name] = nil
+    end
+  end
+  vim.cmd("source $MYVIMRC")
+  print("Config Reloaded!")
+end
