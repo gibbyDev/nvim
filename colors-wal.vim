@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/cody/Pictures/wallpapers/Sunset-room.png"
+let background = "#0c0403"
+let foreground = "#f5dab1"
+let cursor     = "#f5dab1"
+
+" Colors
+let color0  = "#0c0403"
+let color1  = "#994F32"
+let color2  = "#AA472B"
+let color3  = "#A85C4E"
+let color4  = "#E27250"
+let color5  = "#F38858"
+let color6  = "#F79C64"
+let color7  = "#f5dab1"
+let color8  = "#ab987b"
+let color9  = "#994F32"
+let color10 = "#AA472B"
+let color11 = "#A85C4E"
+let color12 = "#E27250"
+let color13 = "#F38858"
+let color14 = "#F79C64"
+let color15 = "#f5dab1"
