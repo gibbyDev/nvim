@@ -18,5 +18,6 @@ require('plugins.neogit')
 require('plugins.codesnap')
 require('plugins.harpoon')
 require('plugins.mini')
+require('plugins.copilot')
 
 -- vim: ts=8 sts=2 sw=2 et
