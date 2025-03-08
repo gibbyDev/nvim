@@ -48,4 +48,3 @@ require('cmp').setup {
       })
     end
 }
-

@@ -25,7 +25,6 @@ vim.keymap.set("n", "<leader>qq", ":q<CR>",
   {silent = true, noremap = true}
 )
 
-
 -- Nvim Tree Toggle
 vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true }) 
 
