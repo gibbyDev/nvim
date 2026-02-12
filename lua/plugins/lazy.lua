@@ -131,24 +131,24 @@ require("lazy").setup({
     },
     config = true,
   },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-    config = function()
-      require("nvim-treesitter.config").setup({
-        ensure_installed = {
-          "go", "lua", "python", "rust", "typescript",
-          "bash", "markdown", "html", "css", "javascript",
-          "yaml", "json", "toml",
-        },
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
-    end,
-  },
-
+  --
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   build = ":TSUpdate",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+  --   config = function()
+  --     require("nvim-treesitter.config").setup({
+  --       ensure_installed = {
+  --         "go", "lua", "python", "rust", "typescript",
+  --         "bash", "markdown", "html", "css", "javascript",
+  --         "yaml", "json", "toml",
+  --       },
+  --       highlight = { enable = true },
+  --       indent = { enable = true },
+  --     })
+  --   end,
+  -- },
+  --
   -- Completion plugins
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
