@@ -58,7 +58,6 @@ local servers = {
   'clangd',
   'rust_analyzer',
   'pyright',
-  'tsserver',
   'gopls',
 }
 
@@ -69,18 +68,14 @@ require('mason-lspconfig').setup {
 
 -- Setup each LSP server
 for _, lsp in ipairs(servers) do
-  require('lspconfig')[lsp].setup {
+  vim.lsp.config[lsp] = {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
 
--- Nix LSP setup
-require('lspconfig').nix.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { 'nix-lsp' },
-}
+-- Enable the configured LSP servers
+vim.lsp.enable(servers)
 
 -- Enable fidget for LSP status updates
 require('fidget').setup()
@@ -90,7 +85,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').lua_ls.setup {
+vim.lsp.config['lua_ls'] = {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -110,6 +105,8 @@ require('lspconfig').lua_ls.setup {
     },
   },
 }
+
+vim.lsp.enable('lua_ls')
 
 -- Bash LSP for sh files
 vim.api.nvim_create_autocmd('FileType', {
