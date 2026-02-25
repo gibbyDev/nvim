@@ -59,6 +59,7 @@ local servers = {
   'rust_analyzer',
   'pyright',
   'gopls',
+  'templ',
 }
 
 -- Ensure the servers above are installed

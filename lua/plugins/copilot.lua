@@ -1,9 +1,7 @@
 -- lua/plugins/copilot.lua
-return {
-    "github/copilot.vim",
-    config = function()
-        vim.cmd("Copilot setup")
-        -- Keybinding to accept Copilot suggestion
-        vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-    end,
-}
+-- Copilot is now configured directly in lazy.lua via zbirenbaum/copilot.lua
+-- and zbirenbaum/copilot-cmp. This file is kept as a placeholder.
+--
+-- Ghost text suggestions appear automatically as you type.
+-- Accept with <C-j>, cycle with <M-]> / <M-[>, dismiss with <C-]>.
+-- Copilot also appears as a source in the nvim-cmp completion menu.

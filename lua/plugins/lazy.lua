@@ -122,15 +122,43 @@ require("lazy").setup({
     dependencies = "nvim-lua/plenary.nvim",
     config = true,
   },
-
-  {
-    "folke/noice.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = true,
+{
+  "folke/noice.nvim",
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "rcarriga/nvim-notify",
   },
+  config = function()
+    require("noice").setup({
+      cmdline = {
+        view = "cmdline_popup",
+      },
+
+      views = {
+        cmdline_popup = {
+          win_options = {
+            winhighlight = {
+              Normal = "Normal",
+              FloatBorder = "Normal",
+            },
+          },
+        },
+      },
+    })
+
+    -- Force float highlights after setup
+    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+  end,
+},
+  -- {
+  --   "folke/noice.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   },
+  --   config = true,
+  -- },
   --
   -- {
   --   "nvim-treesitter/nvim-treesitter",
@@ -149,9 +177,54 @@ require("lazy").setup({
   --   end,
   -- },
   --
+  -- Snippet engine
+  {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
+    build = "make install_jsregexp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+  },
+
+  -- Copilot (Lua version for cmp integration + ghost text)
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept = "<C-j>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        panel = { enabled = false },
+      })
+    end,
+  },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = { "zbirenbaum/copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+
   -- Completion plugins
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-buffer",
+  "saadparwaiz1/cmp_luasnip",
   -- LSP config
   "neovim/nvim-lspconfig",
   -- LSP status

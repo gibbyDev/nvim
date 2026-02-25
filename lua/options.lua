@@ -11,6 +11,11 @@ vim.o.mouse = ''
 -- Enable break indent
 vim.o.breakindent = true
 
+-- Global defaults (all files)
+vim.o.tabstop = 2       -- width of a tab character
+vim.o.shiftwidth = 2    -- width for autoindent (>> and <<)
+vim.o.expandtab = false  -- use actual tabs, not spaces
+
 -- Save undo history
 vim.o.undofile = true
 
@@ -56,7 +61,7 @@ if vim.fn.filereadable(pywal_colors) == 1 then
     set_hl("NvimTreeIndentMarker", vim.g.color8, nil)
 
     -- Apply Pywal colors to CmdLine
-    set_hl("CmdLine", vim.g.color8, vim.g.color15)      -- Command line (default colors)
+    set_hl("CmdLine", vim.g.color4, vim.g.color9)      -- Command line (default colors)
     set_hl("CmdLineInfo", vim.g.color15, vim.g.color1)  -- Command line input
     set_hl("CmdLineError", vim.g.color9, vim.g.color15) -- Error messages in cmdline
     set_hl("CmdLinePopup", vim.g.color2, vim.g.color15) -- Command line popup
@@ -64,6 +69,36 @@ if vim.fn.filereadable(pywal_colors) == 1 then
 else
     vim.cmd.colorscheme("default")
 end
+
+vim.schedule(function()
+  local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+
+  if normal.bg then
+    local groups = {
+      "NormalFloat",
+      "FloatBorder",
+
+      "NoiceCmdline",
+      "NoiceCmdlineIcon",
+      "NoiceCmdlineIconCmdline",
+      "NoiceCmdlinePrompt",
+      "NoiceCmdlinePopup",
+      "NoiceCmdlinePopupBorder",
+
+      "NoicePopup",
+      "NoicePopupBorder",
+      "NoiceConfirm",
+      "NoiceConfirmBorder",
+    }
+
+    for _, group in ipairs(groups) do
+      vim.api.nvim_set_hl(0, group, {
+        bg = normal.bg,
+        fg = normal.fg,
+      })
+    end
+  end
+end)
 
 --vim.cmd()
 vim.opt.clipboard = 'unnamedplus'
